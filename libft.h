@@ -6,13 +6,13 @@
 /*   By: nkuipers <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 15:04:50 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/05 11:00:25 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/06 14:37:41 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
-# include <string.h>
+# include <stddef.h>
 
 typedef struct		s_list
 {

@@ -1,55 +1,63 @@
-NAME		=	libft.a
-SRCS		=	ft_atoi ft_isalnum ft_isalpha ft_isascii\
-	ft_isdigit ft_isprint ft_memset ft_strchr ft_strlcat ft_strlcpy ft_strlen\
-	ft_strncmp ft_strnstr ft_strrchr ft_tolower ft_toupper ft_bzero ft_memcpy\
-	ft_memccpy ft_memchr ft_memcmp ft_memmove ft_calloc ft_strdup ft_substr\
-	ft_strjoin ft_strtrim ft_split ft_itoa ft_strmapi ft_putchar_fd\
-	ft_putstr_fd ft_putendl_fd ft_putnbr_fd
-B_SRCS		=	ft_lstnew_bonus ft_lstadd_front_bonus ft_lstsize_bonus\
-	ft_lstlast_bonus ft_lstadd_back_bonus ft_lstdelone_bonus ft_lstclear_bonus\
-	ft_lstiter_bonus
-CFILES		=	$(SRCS:%=srcs/%.c)
-OFILES		=	$(CFILES:.c=.o)
-BFILES		=	$(B_SRCS:%=b_srcs/%.c)
-BOFILES		=	$(BFILES:.c=.o)
-INCLUDES	=	./includes
-FLAGS		=	-Wall -Werror -Wextra
+# **************************************************************************** #
+#                                                                              #
+#                                                         ::::::::             #
+#    Makefile                                           :+:    :+:             #
+#                                                      +:+                     #
+#    By: nkuipers <marvin@codam.nl>                   +#+                      #
+#                                                    +#+                       #
+#    Created: 2019/10/28 13:56:44 by nkuipers       #+#    #+#                 #
+#    Updated: 2019/11/06 16:23:01 by nkuipers      ########   odam.nl          #
+#                                                                              #
+# **************************************************************************** #
 
-# COLORS
-PINK	= \x1b[35;01m
-BLUE	= \x1b[34;01m
-YELLOW	= \x1b[33;01m
+NAME = 		libft.a
+OBJECTS = 	ft_atoi.o ft_bzero.o ft_calloc.o ft_isalnum.o ft_isalpha.o \
+			ft_isascii.o ft_isdigit.o ft_isprint.o ft_itoa.o ft_memccpy.o \
+			ft_memchr.o ft_memcmp.o ft_memcpy.o ft_memmove.o ft_memset.o \
+			ft_putchar_fd.o ft_putendl_fd.o ft_putnbr_fd.o ft_putstr_fd.o \
+			ft_split.o ft_strchr.o ft_strdup.o ft_strjoin.o ft_strlcat.o \
+			ft_strlcpy.o ft_strlen.o ft_strmapi.o ft_strncmp.o ft_strnstr.o \
+			ft_strrchr.o ft_strtrim.o ft_substr.o ft_tolower.o 	ft_toupper.o
+BONUS =		ft_lstadd_back_bonus.o ft_lstadd_front_bonus.o \
+			ft_lstclear_bonus.o ft_lstclear_bonus.o ft_lstdelone_bonus.o \
+			ft_lstiter_bonus.o ft_lstlast_bonus.o ft_lstmap_bonus.o \
+			ft_lstnew_bonus.o ft_lstsize_bonus.o
+FLAGS = 	-Wall -Werror -Wextra
+INCLUDES = 	libft.h
+
+# COLOURS
 GREEN	= \x1b[32;01m
-RED		= \x1b[31;01m
+WHITE	= \x1b[29;01m
 RESET	= \x1b[0m
 
 all: $(NAME)
 
-$(NAME): $(OFILES)
+%.o: %.c
+	@echo "$(WHITE)Compiling: $<"
+	@gcc -o $@ -c $< $(FLAGS) -I$(INCLUDES)
+
+$(NAME): $(OBJECTS)
 	@echo "$(GREEN)Linking the library"
-	@ar rc $(NAME) $(OFILES)
-	@ranlib $(NAME)
+	@ar rc $(NAME) $(OBJECTS)
 	@echo "$(GREEN)Done"
 
-%.o: %.c
-	@echo "$(BLUE)Compiling: $<"
-	@gcc -o $@ -c $< $(FLAGS) -I $(INCLUDES)
-
 clean: clean_b
-	@echo "$(RED) Cleaning..."
+	@echo "$(WHITE) Cleaning..."
 
 fclean: clean_b
-	@echo "$(PINK)Fabulous cleaning..."
+	@echo "$(WHITE) Cleaning all..."
 	@rm -f $(NAME)
 
 clean_b:
-	@rm -f $(BOFILES)
-	@rm -f $(OFILES)
+	@rm -f $(BONUS)
+	@rm -f $(OBJECTS)
 
 re: fclean all
 
-bonus: $(OFILES) $(BOFILES) $(NAME)
-	@echo "$(GREEN)Linking the bonusses into the library"
-	@ar rc $(NAME) $(OFILES) $(BOFILES)
+bonus: $(OBJECTS) $(BONUS) $(NAME)
+	@echo "$(GREEN)Linking the bonuses into the library"
+	@ar rc $(NAME) $(OBJECTS) $(BONUS)
 	@ranlib $(NAME)
 	@echo "$(GREEN)Done"
+
+.PHONY: all clean fclean re bonus

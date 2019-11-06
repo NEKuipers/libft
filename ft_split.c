@@ -6,79 +6,89 @@
 /*   By: nkuipers <nkuipers@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 13:28:15 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/05 15:09:04 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/06 13:35:42 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 #include <stdlib.h>
 
-static void		*free_all(int j, char **strings)
+static void		*free_all(char **strings)
 {
-	while (j != 0)
+	int i;
+
+	i = 0;
+	while (strings[i] != 0)
 	{
-		free(strings[j]);
-		j--;
+		free(strings[i]);
+		i++;
 	}
-	free(strings);
 	return (NULL);
 }
 
-static int		count_segments(char const *s, char c)
+static int		segcount(char *s, char c)
 {
-	int	i;
-	int	count;
+	int in_string;
+	int count;
 
-	i = 0;
-	count = (s[0] == c ? 0 : 1);
-	while (s[i] != '\0')
+	in_string = 0;
+	count = 0;
+	if (!s)
+		return (0);
+	while (*s != '\0')
 	{
-		if (s[i] == c && s[i + 1] != c && s[i + 1] != '\0')
+		if (*s == c)
+			in_string = 0;
+		if (*s != c && in_string == 0)
+		{
+			in_string = 1;
 			count++;
-		i++;
+		}
+		s++;
 	}
 	return (count);
 }
 
-static int		seg_length(char const *s, char c, int pos)
+static int		seglen(char *s, int i, char c)
 {
-	int	len;
+	int length;
 
-	len = 0;
-	while (s[pos] != '\0' && s[pos] != c)
+	length = 0;
+	while (s[i] != c && s[i] != '\0')
 	{
-		pos++;
-		len++;
+		length++;
+		i++;
 	}
-	return (len);
+	return (length);
 }
 
-static char		**make_strings(char const *s, char c, char **strings)
+static char		**makestrings(char **strings, char const *s, char c)
 {
-	int		segcount;
 	int		i;
 	int		j;
 	int		k;
 
 	i = 0;
 	j = 0;
-	segcount = count_segments(s, c);
-	while (s[i] != '\0' && j < segcount)
+	while (s[i] != '\0' && j < segcount((char *)s, c))
 	{
 		k = 0;
-		strings[j] = (char *)malloc(sizeof(char) * (seg_length(s, c, i) + 1));
-		if (strings[j] == 0)
-			return (free_all(j, strings));
-		while (s[i] != '\0' && s[i] != c && k < seg_length(s, c, i))
+		while (s[i] == c)
+			i++;
+		strings[j] = (char*)malloc(sizeof(char) * seglen((char *)s, i, c) + 1);
+		if (!(strings[j]))
+			return (free_all(strings));
+		while (s[i] != c && s[i] != '\0')
 		{
 			strings[j][k] = s[i];
-			i++;
 			k++;
+			i++;
 		}
 		strings[j][k] = '\0';
 		j++;
 	}
-	strings[j] = NULL;
+	strings[j] = 0;
 	return (strings);
 }
 
@@ -86,11 +96,9 @@ char			**ft_split(char const *s, char c)
 {
 	char	**strings;
 
-	if (s == 0)
-		return (NULL);
-	strings = (char**)malloc(sizeof(char *) * count_segments(s, c) + 1);
-	if (!(strings))
-		return (NULL);
-	strings = make_strings(s, c, strings);
+	strings = (char**)malloc(sizeof(char*) * (segcount((char *)s, c) + 1));
+	if (!(strings) || !(s))
+		return (0);
+	strings = makestrings(strings, s, c);
 	return (strings);
 }

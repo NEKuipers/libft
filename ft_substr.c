@@ -1,0 +1,46 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   ft_substr.c                                        :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: nkuipers <marvin@codam.nl>                   +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2019/10/28 17:48:46 by nkuipers       #+#    #+#                */
+/*   Updated: 2019/11/06 16:32:00 by nkuipers      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include <stdlib.h>
+#include "libft.h"
+
+char	*empty_string(char *new)
+{
+	new = malloc(1);
+	new[0] = '\0';
+	return (new);
+}
+
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*new;
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	if (s == 0)
+		return (NULL);
+	if (start > ft_strlen(s))
+		return (empty_string(new));
+	new = (char *)malloc(sizeof(char) * len + 1);
+	if (new == 0)
+		return (NULL);
+	j = start;
+	while (j < start + len)
+	{
+		new[i] = s[j];
+		i++;
+		j++;
+	}
+	new[i] = '\0';
+	return (new);
+}

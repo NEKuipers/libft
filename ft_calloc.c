@@ -1,37 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   ft_substr.c                                        :+:    :+:            */
+/*   ft_calloc.c                                        :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: nkuipers <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2019/10/28 17:48:46 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/05 15:36:27 by nkuipers      ########   odam.nl         */
+/*   Created: 2019/10/28 16:38:35 by nkuipers       #+#    #+#                */
+/*   Updated: 2019/11/06 10:56:35 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libft.h"
 
-char	*ft_substr(char const *s, unsigned int start, size_t len)
+void	*ft_calloc(size_t count, size_t size)
 {
-	char	*new;
-	size_t	i;
-	size_t	j;
+	void *new;
 
-	i = 0;
-	if (s == 0)
+	new = (void *)malloc(count * size);
+	if (!(new))
 		return (NULL);
-	new = (char *)malloc(sizeof(char) * len + 1);
-	if (new == 0)
-		return (NULL);
-	j = start;
-	while (j < start + len)
-	{
-		new[i] = s[j];
-		i++;
-		j++;
-	}
-	new[i] = '\0';
+	ft_bzero(new, count * size);
 	return (new);
 }
