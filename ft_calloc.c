@@ -6,12 +6,12 @@
 /*   By: nkuipers <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 16:38:35 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/06 10:56:35 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/12 15:31:30 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libft.h"
+#include <stdlib.h>
 
 void	*ft_calloc(size_t count, size_t size)
 {

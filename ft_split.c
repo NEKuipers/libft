@@ -6,12 +6,11 @@
 /*   By: nkuipers <nkuipers@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 13:28:15 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/06 13:35:42 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/11 12:12:24 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 #include <stdlib.h>
 
 static void		*free_all(char **strings)
@@ -24,6 +23,7 @@ static void		*free_all(char **strings)
 		free(strings[i]);
 		i++;
 	}
+	free(strings);
 	return (NULL);
 }
 

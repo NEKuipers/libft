@@ -6,7 +6,7 @@
 /*   By: nkuipers <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 09:44:03 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/06 12:11:12 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/13 15:26:57 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	ft_nbrlen(int nb)
 {
 	int length;
 
-	length = nb < 0 ? 1 : 0;
+	length = (nb < 0) ? 1 : 0;
 	if (nb == 0)
 		return (1);
 	while (nb != 0)

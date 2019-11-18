@@ -6,7 +6,7 @@
 /*   By: nkuipers <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/29 11:51:25 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/11/05 16:36:01 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/13 16:38:54 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ char		*ft_strtrim(char const *s1, char const *set)
 	end = (char *)s1 + ft_strlen(s1) - 1;
 	while (char_check(set, *beg))
 		beg++;
-	while (char_check(set, *end))
+	while (char_check(set, *end) && &*end != &s1[0])
 		end--;
 	end++;
 	new = (char*)malloc((beg >= end) ? 1 : (end - beg + 1));

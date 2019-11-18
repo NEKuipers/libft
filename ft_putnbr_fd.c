@@ -6,7 +6,7 @@
 /*   By: nkuipers <marvin@codam.nl>                   +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2019/10/28 17:28:42 by nkuipers       #+#    #+#                */
-/*   Updated: 2019/10/29 13:24:30 by nkuipers      ########   odam.nl         */
+/*   Updated: 2019/11/12 19:22:00 by nkuipers      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void	ft_putnbr_fd(int n, int fd)
 	}
 	if (n < 0)
 	{
-		ft_putchar_fd('-', 1);
-		n = -n;
+		ft_putchar_fd('-', fd);
+		n = n * -1;
 	}
 	if (n > 9)
 		ft_putnbr_fd(n / 10, fd);
